@@ -123,8 +123,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="ValIntDayResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -145,8 +144,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="OstatDepoResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -167,8 +165,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="ROISfixResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -189,8 +186,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="RuoniaResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -211,8 +207,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="mrrf7DResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -254,8 +249,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="RepoDebtUSDResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -297,8 +291,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="mrrfResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -340,8 +333,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="SaldoResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -399,8 +391,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="XVolResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -474,8 +465,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="NewsInfoResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -496,8 +486,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="SwapDayTotalResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -581,8 +570,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="SwapInfoSellUSDVolResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -603,8 +591,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="SwapInfoSellUSDResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -667,8 +654,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="BiCurBaseResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -700,8 +686,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="BiCurBacketResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -722,8 +707,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="SwapDynamicResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -744,8 +728,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="SwapMonthTotalResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -787,8 +770,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="MKRResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -830,8 +812,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="DVResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -873,8 +854,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="Repo_debtResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -916,8 +896,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="Coins_baseResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -959,8 +938,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="FixingBaseResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -1002,8 +980,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="OvernightResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -1045,8 +1022,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="BauctionResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -1109,8 +1085,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="DepoDynamicResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -1152,8 +1127,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="OstatDynamicResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -1195,8 +1169,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="DragMetDynamicResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -1276,8 +1249,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="EnumValutesResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -1319,8 +1291,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="EnumReutersValutesResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -1360,8 +1331,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="GetReutersCursOnDateResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -1405,8 +1375,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="GetReutersCursDynamicResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -1450,8 +1419,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="GetCursDynamicResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -1511,8 +1479,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="GetSeldCursOnDateResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
@@ -1532,8 +1499,7 @@
                         <s:element minOccurs="0" maxOccurs="1" name="GetCursOnDateResult">
                             <s:complexType>
                                 <s:sequence>
-                                    <s:element ref="s:schema"/>
-                                    <s:any/>
+                                    <s:any maxOccurs="unbounded" />
                                 </s:sequence>
                             </s:complexType>
                         </s:element>
