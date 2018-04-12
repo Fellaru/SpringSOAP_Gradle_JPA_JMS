@@ -1,3 +1,4 @@
 rootProject.name = 'SOAP'
 include 'daily-info-ws'
+include 'core'
 
