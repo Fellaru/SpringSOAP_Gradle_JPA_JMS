@@ -1,4 +1,4 @@
-rootProject.name = 'SOAP'
+rootProject.name = 'EducationProject'
 include 'daily-info-ws'
 include 'core'
 
