@@ -8,5 +8,5 @@
  */
 
 rootProject.name = 'SOAP'
-include 'soap-ws'
+include 'daily-info-ws'
 
