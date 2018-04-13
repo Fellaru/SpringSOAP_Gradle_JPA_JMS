@@ -1,4 +1,4 @@
-<xs:schema xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="ValuteData">
+<xs:schema xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" targetNamespace="http://web.cbr.ru/" id="ValuteData">
     <xs:element name="ValuteData" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
         <xs:complexType>
             <xs:choice minOccurs="0" maxOccurs="unbounded">

@@ -14,3 +14,5 @@ Build всего проекта с выводом на консоль задач
 ``.\gradlew build --console verbose``
 Генерация классов из wsdl:
 ``.\gradlew :daily-info-ws:wsimport``  или ``.\gradlew wsimport``
+Генерация классов из xsd:
+``.\gradlew xjc``
