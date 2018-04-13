@@ -29,7 +29,7 @@ System.setProperty('javax.xml.accessExternalSchema', 'file')
 
 
 wsdl {
-    wsdlFolder = 'daily-info-ws/wsdl/'
+    wsdlFolder = 'daily-info-ws/src/main/resources/wsdl/'
     wsimport {
         sourceDestinationDirectory  = "${buildDir}/generated-sources/jaxb"
     }
