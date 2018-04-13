@@ -18,6 +18,7 @@ dependencies {
     //Spring Boot
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.ws:spring-ws-core'
+    compile project(':daily-info-ws')
 }
 
 bootJar {
