@@ -1,18 +1,20 @@
-<xs:schema xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="ValuteData">
-    <xs:element name="ValuteData" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+<xs:schema id="ValuteData" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+    <xs:element name="ValuteData" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:OnDate="20180414">
         <xs:complexType>
             <xs:choice minOccurs="0" maxOccurs="unbounded">
-                <xs:element name="ValuteCursDynamic">
+                <xs:element name="ValuteCursOnDate">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="CursDate" type="xs:dateTime" minOccurs="0"/>
-                            <xs:element name="Vcode" type="xs:string" minOccurs="0"/>
+                            <xs:element name="Vname" type="xs:string" minOccurs="0"/>
                             <xs:element name="Vnom" type="xs:decimal" minOccurs="0"/>
                             <xs:element name="Vcurs" type="xs:decimal" minOccurs="0"/>
+                            <xs:element name="Vcode" type="xs:int" minOccurs="0"/>
+                            <xs:element name="VchCode" type="xs:string" minOccurs="0"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
             </xs:choice>
+            <xs:attribute type="xs:int" name="OnDate"/>
         </xs:complexType>
     </xs:element>
 </xs:schema>
