@@ -25,3 +25,12 @@ Build всего проекта с выводом на консоль задач
 сгенерированы объекты из wsdl и xsd  помощью jacobono плагинов для gradle (модуль daily-info-ws)
 Spring Web Service использован для написания клиента:
 Наш класс DailyInfoClientImpl наследуется от WebServiceGatewaySupport. В классе ClientConfig настраиваем Маршалер для клиента
+
+
+
+## S.O.L.I.D principles
+ + Single Responsibility Principle
+ + Open/Closed Principle
+ + Liskov Substitution Principle
+ + Interface Segregation Principle
+ + Dependency Inversion Principle
