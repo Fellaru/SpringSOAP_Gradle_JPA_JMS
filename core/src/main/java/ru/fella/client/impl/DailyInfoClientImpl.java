@@ -19,14 +19,22 @@ import java.util.GregorianCalendar;
 @Slf4j
 public class DailyInfoClientImpl extends WebServiceGatewaySupport implements DailyInfoClient {
 
-    private String URI = "http://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx";
+    private final String soapAction = "http://web.cbr.ru/GetCursOnDateXML";
+
+
 
     @Override
     public GetCursOnDateXMLResponse getCursOnDate(Date date) {
         GetCursOnDateXML request = getCursOnDateXMLwith(date);
-        System.out.println("Requesting exchange rate for " + request.getOnDate());
-        GetCursOnDateXMLResponse response = marshalSendAndReceiveUnmarshal(URI, request);
+        log.info("Requesting exchange rate for " + request.getOnDate());
+        GetCursOnDateXMLResponse response = marshalSendAndReceiveUnmarshal(request, soapAction);
         return response;
+    }
+
+    private GetCursOnDateXML getCursOnDateXMLwith(Date date) {
+        GetCursOnDateXML cursOnDateXML = new GetCursOnDateXML();
+        cursOnDateXML.setOnDate(convertDatetoXMLGrigorianCalendar(date));
+        return cursOnDateXML;
     }
 
     @SneakyThrows(DatatypeConfigurationException.class)
@@ -37,19 +45,12 @@ public class DailyInfoClientImpl extends WebServiceGatewaySupport implements Dai
         return currentDate;
     }
 
-    private GetCursOnDateXML getCursOnDateXMLwith(Date date) {
-        GetCursOnDateXML cursOnDateXML = new GetCursOnDateXML();
-        cursOnDateXML.setOnDate(convertDatetoXMLGrigorianCalendar(date));
-        return cursOnDateXML;
-    }
-
-    private GetCursOnDateXMLResponse marshalSendAndReceiveUnmarshal(String uri, GetCursOnDateXML requestPayload) {
+    private GetCursOnDateXMLResponse marshalSendAndReceiveUnmarshal(GetCursOnDateXML requestPayload, String soapAction) {
         WebServiceTemplate webServiceTemplate = getWebServiceTemplate();
 
         Object response = webServiceTemplate.marshalSendAndReceive(
-                URI,
                 requestPayload,
-                new SoapActionCallback("http://web.cbr.ru/GetCursOnDateXML")
+                new SoapActionCallback(soapAction)
         );
 
         return (GetCursOnDateXMLResponse) response;

@@ -1,8 +1,10 @@
 package ru.fella.client.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+import ru.fella.client.DailyInfoClient;
 import ru.fella.client.impl.DailyInfoClientImpl;
 
 /**
@@ -19,9 +21,9 @@ public class ClientConfig {
     }
 
     @Bean()
-    public DailyInfoClientImpl quoteClient(Jaxb2Marshaller marshaller) {
+    public DailyInfoClient quoteClient(@Value("${webService.uri}") String uri, Jaxb2Marshaller marshaller) {
         DailyInfoClientImpl client = new DailyInfoClientImpl();
-        client.setDefaultUri("http://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx");
+        client.setDefaultUri(uri);
         client.setMarshaller(marshaller);
         client.setUnmarshaller(marshaller);
         return client;

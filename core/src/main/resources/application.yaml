@@ -1,0 +1,2 @@
+webService:
+  uri : "http://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx"
