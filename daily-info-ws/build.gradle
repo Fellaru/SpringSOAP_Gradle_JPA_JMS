@@ -38,6 +38,9 @@ System.setProperty('javax.xml.accessExternalSchema', 'file')
 
 wsdl {
     wsdlFolder = 'daily-info-ws/src/main/resources/wsdl/'
+    wsimport {
+        wsdlLocation = 'http://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx?WSDL'
+    }
 }
 
 
