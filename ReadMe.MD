@@ -16,3 +16,12 @@ Build всего проекта с выводом на консоль задач
 ``.\gradlew :daily-info-ws:wsimport``  или ``.\gradlew wsimport``
 Генерация классов из xsd:
 ``.\gradlew xjc``
+Запуск приложения:
+``.\gradlew bootRun``
+
+
+Проект с использование Spring Boot + Gradle
+Создан клиент для SOAP ервиса http://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx?WSDL 
+сгенерированы объекты из wsdl и xsd  помощью jacobono плагинов для gradle (модуль daily-info-ws)
+Spring Web Service использован для написания клиента:
+Наш класс DailyInfoClientImpl наследуется от WebServiceGatewaySupport. В классе ClientConfig настраиваем Маршалер для клиента
