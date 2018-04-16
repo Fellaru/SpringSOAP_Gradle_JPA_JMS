@@ -1,2 +1,5 @@
 webService:
   uri : "http://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx"
+
+
+xsdPath: "C://LEARN/EducationProject/daily-info-ws/src/main/resources/xsd/ValuteData.xsd"

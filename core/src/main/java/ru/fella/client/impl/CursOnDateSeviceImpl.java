@@ -4,7 +4,9 @@ import generated.ValuteData;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import ru.cbr.web.GetCursOnDateXMLResponse;
 import ru.fella.client.CursOnDateSevice;
@@ -24,29 +26,39 @@ import java.util.Date;
 @Service
 public class CursOnDateSeviceImpl implements CursOnDateSevice {
 
+    @Value("${xsdPath}")
+    private String xsdPath;
+
     @Setter
     @Autowired
     private DailyInfoClient client;
 
     @Override
-    @SneakyThrows
     public ValuteData getValuteCurs() {
         GetCursOnDateXMLResponse cursOnDateXMLResponse = client.getCursOnDate(new Date());
-        Element element = (Element) (cursOnDateXMLResponse.getGetCursOnDateXMLResult().getContent().get(0));
-
-        return (ValuteData) getUnmarshaller().unmarshal(element.getOwnerDocument());
+        Document xml = getXmlFromResponse(cursOnDateXMLResponse);
+        return unmarshal(xml);
     }
 
+    private Document getXmlFromResponse(GetCursOnDateXMLResponse response) {
+        Element element = (Element) (response.getGetCursOnDateXMLResult().getContent().get(0));
+        return element.getOwnerDocument();
+    }
 
+    @SneakyThrows
+    private ValuteData unmarshal(Document xml) {
+        return (ValuteData) getUnmarshaller().unmarshal(xml);
+    }
 
     @SneakyThrows
     private Unmarshaller getUnmarshaller() {
         JAXBContext jaxbContext = JAXBContext.newInstance(ValuteData.class);
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
         SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-        Schema schema = sf.newSchema(new File("C://LEARN/EducationProject/daily-info-ws/src/main/resources/xsd/ValuteData.xsd"));
 
+        Schema schema = sf.newSchema(new File(xsdPath));
         jaxbUnmarshaller.setSchema(schema);
+
         return jaxbUnmarshaller;
     }
 
