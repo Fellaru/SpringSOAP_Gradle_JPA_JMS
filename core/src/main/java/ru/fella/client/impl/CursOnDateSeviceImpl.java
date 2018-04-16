@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Element;
 import ru.cbr.web.GetCursOnDateXMLResponse;
+import ru.fella.client.CursOnDateSevice;
 import ru.fella.client.DailyInfoClient;
 
 import javax.xml.XMLConstants;
@@ -21,12 +22,13 @@ import java.util.Date;
  * Created by efischenko on 13.04.2018.
  */
 @Service
-public class CursOnDateSeviceImpl {
+public class CursOnDateSeviceImpl implements CursOnDateSevice {
 
     @Setter
     @Autowired
     private DailyInfoClient client;
 
+    @Override
     @SneakyThrows
     public ValuteData getValuteCurs() {
         GetCursOnDateXMLResponse cursOnDateXMLResponse = client.getCursOnDate(new Date());
