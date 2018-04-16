@@ -5,12 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import ru.fella.client.impl.CursOnDateSevice;
+import ru.fella.client.impl.CursOnDateSeviceImpl;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner{
     @Autowired
-    CursOnDateSevice cursOnDateSevice;
+    CursOnDateSeviceImpl cursOnDateSevice;
 
 
     public static void main(String[] args) {

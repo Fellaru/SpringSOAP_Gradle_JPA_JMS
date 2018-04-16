@@ -21,7 +21,7 @@ import java.util.Date;
  * Created by efischenko on 13.04.2018.
  */
 @Service
-public class CursOnDateSevice {
+public class CursOnDateSeviceImpl {
 
     @Setter
     @Autowired
