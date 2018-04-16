@@ -1,6 +1,7 @@
 
 package ru.cbr.web;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
@@ -20,7 +21,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.1
  * 
  */
-@WebServiceClient(name = "DailyInfo", targetNamespace = "http://web.cbr.ru/", wsdlLocation = "FILL_IN_BY_SERVER")
+@WebServiceClient(name = "DailyInfo", targetNamespace = "http://web.cbr.ru/", wsdlLocation = "http://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx?WSDL")
 public class DailyInfo
     extends Service
 {
@@ -30,11 +31,14 @@ public class DailyInfo
     private final static QName DAILYINFO_QNAME = new QName("http://web.cbr.ru/", "DailyInfo");
 
     static {
-        DAILYINFO_WSDL_LOCATION = ru.cbr.web.DailyInfo.class.getResource("FILL_IN_BY_SERVER");
+        URL url = null;
         WebServiceException e = null;
-        if (DAILYINFO_WSDL_LOCATION == null) {
-            e = new WebServiceException("Cannot find 'FILL_IN_BY_SERVER' wsdl. Place the resource correctly in the classpath.");
+        try {
+            url = new URL("http://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx?WSDL");
+        } catch (MalformedURLException ex) {
+            e = new WebServiceException(ex);
         }
+        DAILYINFO_WSDL_LOCATION = url;
         DAILYINFO_EXCEPTION = e;
     }
 
