@@ -1,0 +1,5 @@
+dependencies {
+    compile group: 'javax.persistence', name: 'persistence-api', version: '1.0'
+    compile group: 'postgresql', name: 'postgresql', version: '9.1-901-1.jdbc4'
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.16.Final'
+}

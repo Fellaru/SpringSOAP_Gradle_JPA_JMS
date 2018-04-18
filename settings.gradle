@@ -1,4 +1,5 @@
 rootProject.name = 'EducationProject'
 include 'daily-info-ws'
 include 'core'
+include 'dao'
 
