@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -20,7 +22,8 @@ import java.math.BigDecimal;
 @EqualsAndHashCode
 public class CursInfoId implements Serializable {
     private BigDecimal curs;
-    @OneToOne(mappedBy = "valuteId")
+    @OneToOne
+    @JoinColumn(name="valute_id")
     private ValuteInfo valuteInfo;
 
 }
