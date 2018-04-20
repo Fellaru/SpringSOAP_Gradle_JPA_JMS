@@ -16,7 +16,7 @@ TODO
 1. [Hibernate Cache](https://habrahabr.ru/post/135176/)
 1. [The JPA 2.0 EntityManager vs. the Hibernate Session: Which one to use](https://www.theserverside.com/news/2240186700/The-JPA-20-EntityManager-vs-the-Hibernate-Session-Which-one-to-use)
 1. [Hibernate основы работы с сессиями и транзакциями](https://habrahabr.ru/post/271115/)
-
+1. [Container vs Application managed entitymanager](http://www.byteslounge.com/tutorials/container-vs-application-managed-entitymanager)
 1. [Баг Spring Boot Postgresql](https://stackoverflow.com/questions/43905119/postgres-error-method-org-postgresql-jdbc-pgconnection-createclob-is-not-imple)
 
 # О приложении
@@ -328,11 +328,8 @@ Persistence Context и Entity Manager - два базовых концепта (
 
 **PersistenceContext is managed by the enterprise container.** При этом контейнер ответственен за создание PersistenceContext,
  его внедрение в компоненты и также несет ответственность за его удаление в конце текущей транзакции.
-При том все EntityManager'ы будут использовать один и тот же Persistence Context и тот же что и в enterprise контейнере(Tomcat, Jboss) 
 
-
------ТУТ Я НЕ ПОНИМАЮ СУТЬ НОМАЛЬНО --
-С EntityManager'ом управляемым контейнером(Tomcat, Jboss) (container-managed entity manager), persistence context принадлежащий экземпляру EntityManager 
+С EntityManager'ом управляемым контейнером(например Jboss) (container-managed entity manager), persistence context принадлежащий экземпляру EntityManager 
 автоматически распространяется контейнером ко всем компонентам приложения, которые используют экземпляр EntityManager 
 в рамках одной транзакции Java Transactional API (JTA).
 
@@ -344,10 +341,9 @@ Persistence Context и Entity Manager - два базовых концепта (
 приложения не нужно передавать ссылки на экземпляры EntityManager друг другу, чтобы вносить изменения в одну транзакцию.
 Контейнер Java EE управляет жизненным циклом управляемым контейнером EntityManager'ом(container-managed entity manager).
 
------ТУТ Я НЕ ПОНИМАЮ СУТЬ НОМАЛЬНО --
+** ** **
 
-
-Используя аннотацию **javax.persistence.PersistenceContext** мы можем inject(внедрить) EntityManager в наше приложение.
+Используя аннотацию **javax.persistence.PersistenceContext** мы можем inject(внедрить) container-manage EntityManager в наше приложение.
 
 ```
 @PersistenceContext
@@ -356,6 +352,111 @@ Persistence Context и Entity Manager - два базовых концепта (
  
 ###**Application-Managed Entity Managers**
 
-С EntityManager'ом управляемым приложением контекст персистентности(PersistenceContext) не распространяется на компоненты приложения,
-а жизненный цикл экземпляров EntityManager управляется приложением.
+С EntityManager'ом управляемым приложением (application-managed entity manager) контекст персистентности(PersistenceContext)
+не распространяется на компоненты приложения, а жизненный цикл экземпляров EntityManager управляется приложением.
   
+Application-managed entity manager используется в случаях, когда приложениям необходимо получить доступ к 
+PersistenceContext, который не передается с транзакцией JTA через экземпляры EntityManager в определенном модуле сохранения.
+( in a particular persistence unit) (Что за модуль сохранения??!!) 
+
+
+!!**In this case, each EntityManager creates a new, isolated persistence context.** В этом случае каждый EntityManager
+создает новый изолированный persistence context. EntityManager и связанный с ним persistence context создаются и уничтожаются
+явным образом приложением. Они также используются, когда непосредственное впрыскивание экземпляров EntityManager невозможно,
+поскольку **экземпляры EntityManager не являются потокобезопасными. Экземпляры EntityManagerFactory являются потокобезопасными.**
+
+Приложение создает Entity Manager с помощью javax.persistence.EntityManagerFactory -> entityManagerFactory.createEntityManager()
+
+Получить экземпляр EntityManagerFactory можно используя аннотацию **javax.persistence.PersistenceUnit**
+
+```
+@PersistenceUnit
+EntityManagerFactory emf;
+```
+
+```
+EntityManager em = emf.createEntityManager();
+```
+
+!Про транзакции
+Application-managed entity managers don't automatically propagate the JTA transaction context.
+
+Nакие приложения должны вручную получить доступ к диспетчеру транзакций JTA и добавить информацию о демаркации транзакции
+при выполнении операций с объектами. Интерфейс javax.transaction.UserTransaction определяет методы для begin, commit,
+and rollback  транзакций. Внесите экземпляр UserTransaction, создав переменную экземпляра, аннотированную с помощью @Resource:
+
+```
+@Resource
+UserTransaction utx;
+```
+
+Полный пример:
+```$xslt
+@PersistenceUnit
+EntityManagerFactory emf;
+EntityManager em;
+@Resource
+UserTransaction utx;
+...
+em = emf.createEntityManager();
+try {
+    utx.begin();
+    em.persist(SomeEntity);
+    em.merge(AnotherEntity);
+    em.remove(ThirdEntity);
+    utx.commit();
+} catch (Exception e) {
+    utx.rollback();
+}
+```
+
+#####Управление жизненным циклом экземпляра Entity
+ Вы управляете жизненым циклом Entity , вызывая операции EntityManager'а. Entity могут находится в одном из 4-х состояний:
+ - **new** Новые экземпляры Entity не имеют persistent identity и еще не связаны с persistence context.
+ - **managed** Управляемые экземпляры Entity имеют persistent identity и связаны с persistence context.
+ - **detached** Отдельные экземпляры Entity имеют persistent identity и в настоящее время не связаны с persistence context.
+ - **removed** Удаленные экземпляры Entity имеют persistent identity, связанные с persistence context и планируются 
+ для удаления из хранилища данных(БД).
+ 
+ 
+ #####Цитата про  разлиция в new и detached
+ Открою Вам тайну - у entity предусмотрено четыре состояния. Отцы-основатели HIBERNATE в своей книге называют следующие
+  названия: transient, persistent, detached и removed. В спецификации JPA 2.1 их тоже четыре, но с немного другими 
+  именами: new, managed, detached и removed. New и detached сходны между собой в том, что они не хранятся в кэш первого 
+  уровня, а отличаются тем, что у new нет в БД образа (с тем же ID), а у detached - есть. JPA 2.1 предполагает разную 
+  реакцию new и detached объектов на действия. Например, если применить метод persist к new, то он станет managed, а если
+  применить метод persist к detached, то должна быть поднята ошибка.
+  
+  
+ 
+#####Некоторые методы EntityManager'а: (EntityManager.метод)
+ - **find**
+    - метод используется для поиска entity в БД по первичному ключу
+    
+ - **persist**
+    - Новый экземпляр Entity стновится managed and persistent при вызове метода persist или посредством каскадной 
+     операции persist, вызываемой из связанных объектов, которые имеют элементы cascade = PERSIST или cascade = ALL,
+     установленные в аннотации отношений. Т.е данные объекта сохранятся в базе данных как только транзакция, связанная с
+     persist завершиться. Если entity уже managed, тогда операция persist игнорируется, хотя операция persist будет 
+     каскадироваться к связанным объектам, у которых каскадный элемент установлен в PERSIST или ALL в аннотации отношений.
+     Если entity находится в состоянии detached, тогда операция persist будет throw IllegalArgumentException, или commit
+     транзакции завершиться ошибкой. Операция persist распространяется на все entity, относящиеся к вызывающему entity,
+     у которого в аннотации отношений cascade аттрибут установлен в ALL или PERSIST.
+     
+ - **remove**
+     - Managed экземпляры entity удаляются путем вызова remove метода или посредством каскадной операции remove, вызываемой
+      из связанных объектов, которые имеют элементы cascade = REMOVE  или cascade = ALL, становленные в аннотации отношений.
+      Если метод удаления вызывается на новом объекте, операция удаления игнорируется, хотя remove будет каскадироваться
+      к связанным объектам, у которых каскадный элемент установлен в REMOVE или ALL в аннотации отношений. Если remove 
+      вызывается для detached entity, тогда операция remove будет вызывать исключение IllegalArgumentException, или commit
+      транзакции завершиться ошибкой. Данные entity будут удалены из хранилища данных после завершения транзакции или в 
+      результате операции flush(сброса).
+      
+ - **flush**
+    - Состояние persistent entities синхронизируется с базой данных, когда совершается транзакция, с которой связана entity.
+     Если управляемый entity находится в двунаправленной связи с другим управляемым entity, данные будут сохраняться,
+     основываясь на стороне которой принадлежит отношение. Чтобы принудительно синхронизировать управляемый entity 
+     с хранилищем данных, вызовите метод flush экземпляра EntityManager. Если объект связан с другим объектом, а аннотация
+     отношения имеет аттрибут cascade, установленный в PERSIST или ALL, данные связанного объекта будут синхронизированы
+     с хранилищем данных, когда вызывается flush.
+           
